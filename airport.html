@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazsi City Nemzetközi Repülőtér</title>
+    <style>
+      /* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #003366;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem; /* Kisebb méret */
+}
+
+
+.logo img {
+    margin-right: 15px;
+    size: 20%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem; /* Kisebb méret */
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Navigation Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #71c7ec;
+    border-bottom: 2px solid #71c7ec;
+}
+
+.lang-selector {
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #71c7ec;
+    background-color: #004080;
+    color: white;
+    cursor: pointer;
+}
+
+/* Warning Banner */
+.warning-banner {
+    background-color: #ff6b6b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 30px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 30px;
+}
+
+.hero-content h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #71c7ec;
+    color: #003366;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #003366;
+    color: white;
+}
+
+/* Section Titles */
+.section-title {
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #003366;
+    font-size: 28px;
+}
+
+/* Terminal Info Cards */
+.terminal-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.terminal-card {
+    flex: 1;
+    min-width: 250px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.terminal-header {
+    background-color: #003366;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.terminal-content {
+    padding: 20px;
+}
+
+.terminal-content ul {
+    list-style-type: none;
+}
+
+.terminal-content li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.terminal-content li:before {
+    content: "✈";
+    position: absolute;
+    left: 0;
+    color: #003366;
+}
+
+.terminal-card.closed {
+    opacity: 0.8;
+}
+
+.closed-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Flight Tables */
+.flight-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flight-table th,
+.flight-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.flight-table th {
+    background-color: #003366;
+    color: white;
+}
+
+.flight-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.flight-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Flight Status Colors */
+.status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.status-ontime {
+    background-color: #81c784;
+    color: #1b5e20;
+}
+
+.status-delayed {
+    background-color: #ffb74d;
+    color: #e65100;
+}
+
+.status-cancelled {
+    background-color: #e57373;
+    color: #b71c1c;
+}
+
+/* Services List */
+#services ul {
+    list-style-type: none;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#services li {
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position: relative;
+}
+
+#services li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #003366;
+    font-weight: bold;
+}
+
+/* Contact Page */
+#contact ul {
+    list-style-type: none;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact li {
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position: relative;
+}
+
+#contact li:before {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    color: #003366;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+        size: 20%;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links li {
+        margin: 5px 10px;
+    }
+    
+    .hero-content h2 {
+        font-size: 24px;
+    }
+    
+    .hero-content p {
+        font-size: 16px;
+    }
+    
+    .terminal-card {
+        flex: 1 1 100%;
+    }
+    
+    .flight-table {
+        font-size: 14px;
+    }
+    
+    .flight-table th,
+    .flight-table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 18px;
+    }
+    
+    .lang-selector {
+        margin-top: 10px;
+    }
+    
+    .hero-content {
+        position: relative;
+        background: #003366;
+    }
+    
+    .flight-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <img  width= "100" src="Bazsi_City_Airport-removebg-preview.png" alt="">
+                <h1>Bazsi City Nemzetközi Repülőtér</h1>
+            </a>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="#" class="active" onclick="openTab('home')">Főoldal</a></li>
+                    <li><a href="#" onclick="openTab('departures')">Indulások</a></li>
+                    <li><a href="#" onclick="openTab('arrivals')">Érkezések</a></li>
+                    <li><a href="#" onclick="openTab('services')">Szolgáltatások</a></li>
+                    <li><a href="#" onclick="openTab('contact')">Kapcsolat</a></li>
+                </ul>
+                <label for="language-selector" class="sr-only">Válasszon nyelvet:</label>
+                <select id="language-selector" class="lang-selector" onchange="changeLanguage(this.value)">
+                    <option value="hu">Magyar</option>
+                    <option value="en">English</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="warning-banner">
+        ⚠️ FIGYELEM! Az A terminálon munkálatok vannak így bizonyos szolgáltatások nem elérhetők! ⚠️
+    </div>
+    
+    <div id="home" class="tab-content active">
+        <div class="container">
+            <div class="hero">
+                <img class="hero-image" src="https://img.freepik.com/free-photo/airport-terminal_1417-1456.jpg" alt="Repülőtér">
+                <div class="hero-content">
+                    <h2>Üdvözöljük a Bazsi City Nemzetközi Repülőtéren!</h2>
+                    <p>Az Ön kapuja a világ felé - minőségi szolgáltatások és biztonságos utazás.</p>
+                    <a href="#" class="btn" onclick="openTab('services')">Fedezze fel szolgáltatásainkat</a>
+                </div>
+            </div>
+
+            <h2 class="section-title">Terminálinformációk</h2>
+            <div class="terminal-info">
+                <div class="terminal-card">
+                    <div class="terminal-header">A Terminál</div>
+                    <div class="terminal-content">
+                        <ul>
+                            <li>Minden járat</li>
+                            <li>Check-in</li>
+                            <li>Éttermek és kávézók</li>
+                            <li>Duty-free üzletek</li>
+                            <li>VIP lounge</li>
+                            <li>Nyitva: 0:00-24:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="terminal-card closed">
+                    <div class="terminal-header">B Terminál</div>
+                    <div class="terminal-content">
+                        <ul>
+                            <li>Európai járatok</li>
+                            <li>Skandináv dizájn</li>
+                            <li>Üzletek és éttermek</li>
+                            <li>Gyerekbarát váróterület</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="terminal-card closed">
+                    <div class="terminal-header">C Terminál</div>
+                    <div class="terminal-content">
+                        <ul>
+                            <li>Nemzetközi járatok</li>
+                            <li>Check-in</li>
+                            <li>Ülőhelyek</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="departures" class="tab-content">
+        <div class="container">
+            <h2 class="section-title">Induló járatok</h2>
+            <p>Az alábbi táblázatban megtalálhatók a mai napra tervezett induló járatok.</p>
+            
+            <table class="flight-table">
+                <thead>
+                    <tr>
+                        <th>Járatszám</th>
+                        <th>Célállomás</th>
+                        <th>Tervezett indulás</th>
+                        <th>Kapu</th>
+                        <th>Állapot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BA2490</td>
+                        <td>London (LHR)</td>
+                        <td>08:30</td>
+                        <td>A3</td>
+                        <td class="status status-ontime">Elindult</td>
+                    </tr>
+                    <tr>
+                        <td>LH1335</td>
+                        <td>Frankfurt (FRA)</td>
+                        <td>09:45</td>
+                        <td>A1</td>
+                        <td class="status status-ontime">Beszállítás</td>
+                    </tr>
+                    <tr>
+                        <td>W62281</td>
+                        <td>Barcelona (BCN)</td>
+                        <td>10:15</td>
+                        <td>B5</td>
+                        <td class="status status-delayed">30 perc késés</td>
+                    </tr>
+                    <tr>
+                        <td>FR5190</td>
+                        <td>Róma (FCO)</td>
+                        <td>11:30</td>
+                        <td>A02</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                    <tr>
+                        <td>EW8913</td>
+                        <td>Berlin (BER)</td>
+                        <td>12:45</td>
+                        <td>B4</td>
+                        <td class="status status-cancelled">Törölve</td>
+                    </tr>
+                    <tr>
+                        <td>SQ5214</td>
+                        <td>Singapúr</td>
+                        <td>14:20</td>
+                        <td>C2</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                    <tr>
+                        <td>KL1972</td>
+                        <td>Amszterdam (AMS)</td>
+                        <td>16:10</td>
+                        <td>A04</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="arrivals" class="tab-content">
+        <div class="container">
+            <h2 class="section-title">Érkező járatok</h2>
+            <p>Az alábbi táblázatban megtalálhatók a mai napra tervezett érkező járatok.</p>
+            
+            <table class="flight-table">
+                <thead>
+                    <tr>
+                        <th>Járatszám</th>
+                        <th>Indulási hely</th>
+                        <th>Tervezett érkezés</th>
+                        <th>Terminál</th>
+                        <th>Állapot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BA2491</td>
+                        <td>London (LHR)</td>
+                        <td>09:50</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Leszállt</td>
+                    </tr>
+                    <tr>
+                        <td>LH1336</td>
+                        <td>Frankfurt (FRA)</td>
+                        <td>11:20</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Hamarosan érkezik</td>
+                    </tr>
+                    <tr>
+                        <td>W62282</td>
+                        <td>Barcelona (BCN)</td>
+                        <td>13:45</td>
+                        <td>B</td>
+                        <td class="status status-delayed">20 perc késés</td>
+                    </tr>
+                    <tr>
+                        <td>FR5191</td>
+                        <td>Róma (FCO)</td>
+                        <td>14:55</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                    <tr>
+                        <td>EW8914</td>
+                        <td>Berlin (BER)</td>
+                        <td>16:20</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Leszállt</td>
+                    </tr>
+                    <tr>
+                        <td>AF1296</td>
+                        <td>Párizs (CDG)</td>
+                        <td>17:00</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                    <tr>
+                        <td>KL1973</td>
+                        <td>Amszterdam (AMS)</td>
+                        <td>19:15</td>
+                        <td>A</td>
+                        <td class="status status-ontime">Időben</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="services" class="tab-content">
+        <div class="container">
+            <h2 class="section-title">Szolgáltatások</h2>
+            <p>A repülőtér számos kényelmi szolgáltatást biztosít utasaink számára:</p>
+            <ul>
+                <li>Ingyenes Wi-Fi</li>
+                <li>Taxizás és bérelt autók</li>
+                <li>Repülőtéri transzfer busz</li>
+                <li>Parkolás (rövid és hosszú távú)</li>
+                <li>VIP lounge</li>
+                <li>First Aid és gyógyszertár</li>
+                <li>Gyerekbarát területek</li>
+                <li>Hangosbemondó rendszer</li>
+                <li>Kutyás vezetés</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="contact" class="tab-content">
+        <div class="container">
+            <h2 class="section-title">Kapcsolat</h2>
+            <p>Ha bármilyen kérdése van, vegye fel velünk a kapcsolatot:</p>
+            <ul>
+                <li>Email: info@bazsirepter.hu</li>
+                <li>Telefon: +36 1 234 5678</li>
+                <li>Cím: Bazsi City Repülőtér, 2. kerület</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bazsi City Nemzetközi Repülőtér. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script>
+      // Tab váltás funkció
+      function openTab(tabName) {
+          // Minden tab content elrejtése
+          var tabContents = document.getElementsByClassName('tab-content');
+          for (var i = 0; i < tabContents.length; i++) {
+              tabContents[i].classList.remove('active');
+          }
+          
+          // Minden tab link aktív állapotának eltávolítása
+          var tabLinks = document.querySelectorAll('.nav-links a');
+          for (var i = 0; i < tabLinks.length; i++) {
+              tabLinks[i].classList.remove('active');
+          }
+          
+          // Kiválasztott tab megjelenítése
+          document.getElementById(tabName).classList.add('active');
+          
+          // Kiválasztott link aktív állapotának beállítása
+          var activeLink = document.querySelector('.nav-links a[data-tab="' + tabName + '"]');
+          if (activeLink) {
+              activeLink.classList.add('active');
+          }
+          
+          // Scroll to top for better UX
+          window.scrollTo(0, 0);
+      }
+      
+      // Nyelvváltás funkció
+      function changeLanguage(language) {
+          // Itt valósítanánk meg a nyelvváltás logikáját
+          console.log('Nyelv váltása: ' + language);
+      
+          // Kiválasztjuk a megfelelő nyelvi objektumot a translations-ból
+          const selectedLang = translations[language];
+          
+          // Frissítjük a szövegeket a nyelv szerint
+          document.querySelector('.logo h1').textContent = selectedLang.header.title;
+          document.querySelector('.warning-banner').innerHTML = selectedLang.warning;
+          
+          // Navigációs menü frissítése
+          var navItems = document.querySelectorAll('.nav-links a');
+          var navLabels = selectedLang.header.nav;
+          
+          for (var i = 0; i < navItems.length; i++) {
+              navItems[i].textContent = navLabels[i];
+          }
+          
+          // Itt további fordítások alkalmazása történik...
+          // Példa: Home szekció
+          document.querySelector('.hero h1').textContent = selectedLang.home.hero.title;
+          document.querySelector('.hero p').textContent = selectedLang.home.hero.subtitle;
+          document.querySelector('.hero button').textContent = selectedLang.home.hero.button;
+          
+          // Terminálok és egyéb tartalmak fordítása
+          document.querySelector('#terminalAHeader').textContent = selectedLang.home.terminals.a.header;
+          // Ismételjük meg minden szekcióra
+      }
+      
+        // Bővített nyelvi fordítások
+const translations = {
+    hu: {
+        header: {
+            title: 'Bazsi City Nemzetközi Repülőtér',
+            nav: ['Főoldal', 'Indulások', 'Érkezések', 'Szolgáltatások', 'Kapcsolat'],
+            langSelector: 'Válasszon nyelvet:'
+        },
+        warning: 'Kellemes húsvetot kívánunk minden utasunknak! ',
+        home: {
+            hero: {
+                title: 'Üdvözöljük a Bazsi City Nemzetközi Repülőtéren!',
+                subtitle: 'Az Ön kapuja a világ felé - minőségi szolgáltatások és biztonságos utazás.',
+                button: 'Fedezze fel szolgáltatásainkat'
+            },
+            terminalTitle: 'Terminálinformációk',
+            terminals: {
+                a: {
+                    header: 'A Terminál',
+                    items: [
+                        'Minden járat',
+                        'Check-in',
+                        'Éttermek és kávézók',
+                        'Duty-free üzletek',
+                        'VIP lounge',
+                        'Nyitva: 0:00-24:00'
+                    ]
+                },
+                b: {
+                    header: 'B Terminál',
+                    items: [
+                        'Európai járatok',
+                        'Skandináv dizájn',
+                        'Üzletek és éttermek',
+                        'Gyerekbarát váróterület'
+                    ]
+                },
+                c: {
+                    header: 'C Terminál',
+                    items: [
+                        'Nemzetközi járatok',
+                        'Check-in',
+                        'Ülőhelyek'
+                    ]
+                }
+            }
+        },
+        departures: {
+            title: 'Induló járatok',
+            intro: 'Az alábbi táblázatban megtalálhatók a mai napra tervezett induló járatok.',
+            table: {
+                headers: ['Járatszám', 'Célállomás', 'Tervezett indulás', 'Kapu', 'Állapot'],
+                statuses: {
+                    ontime: 'Időben',
+                    departed: 'Elindult',
+                    boarding: 'Beszállítás',
+                    delayed: ' perc késés',
+                    cancelled: 'Törölve'
+                }
+            }
+        },
+        arrivals: {
+            title: 'Érkező járatok',
+            intro: 'Az alábbi táblázatban megtalálhatók a mai napra tervezett érkező járatok.',
+            table: {
+                headers: ['Járatszám', 'Indulási hely', 'Tervezett érkezés', 'Terminál', 'Állapot'],
+                statuses: {
+                    ontime: 'Időben',
+                    landed: 'Leszállt',
+                    approaching: 'Hamarosan érkezik',
+                    delayed: ' perc késés'
+                }
+            }
+        },
+        services: {
+            title: 'Szolgáltatások',
+            intro: 'A repülőtér számos kényelmi szolgáltatást biztosít utasaink számára:',
+            items: [
+                'Ingyenes Wi-Fi',
+                'Taxizás és bérelt autók',
+                'Repülőtéri transzfer busz',
+                'Parkolás (rövid és hosszú távú)',
+                'VIP lounge',
+                'First Aid és gyógyszertár',
+                'Gyerekbarát területek',
+                'Hangosbemondó rendszer',
+                'Kutyás vezetés'
+            ]
+        },
+        contact: {
+            title: 'Kapcsolat',
+            intro: 'Ha bármilyen kérdése van, vegye fel velünk a kapcsolatot:',
+            items: [
+                'Email: info@bazsirepter.hu',
+                'Telefon: +36 1 234 5678',
+                'Cím: Bazsi City Repülőtér, 2. kerület'
+            ]
+        },
+        footer: {
+            copyright: '© 2025 Bazsi City Nemzetközi Repülőtér. Minden jog fenntartva.'
+        }
+    },
+    en: {
+        header: {
+            title: 'Bazsi City International Airport',
+            nav: ['Home', 'Departures', 'Arrivals', 'Services', 'Contact'],
+            langSelector: 'Select language:'
+        },
+        warning: 'Happy Easter to all our passengers!',
+        home: {
+            hero: {
+                title: 'Welcome to Bazsi City International Airport!',
+                subtitle: 'Your gateway to the world - quality services and safe travel.',
+                button: 'Discover our services'
+            },
+            terminalTitle: 'Terminal Information',
+            terminals: {
+                a: {
+                    header: 'Terminal A',
+                    items: [
+                        'All flights',
+                        'Check-in',
+                        'Restaurants and cafés',
+                        'Duty-free shops',
+                        'VIP lounge',
+                        'Open: 24/7'
+                    ]
+                },
+                b: {
+                    header: 'Terminal B',
+                    items: [
+                        'European flights',
+                        'Scandinavian design',
+                        'Shops and restaurants',
+                        'Child-friendly waiting area'
+                    ]
+                },
+                c: {
+                    header: 'Terminal C',
+                    items: [
+                        'International flights',
+                        'Check-in',
+                        'Seating areas'
+                    ]
+                }
+            }
+        },
+        departures: {
+            title: 'Departures',
+            intro: 'The table below shows all scheduled departures for today.',
+            table: {
+                headers: ['Flight', 'Destination', 'Scheduled Departure', 'Gate', 'Status'],
+                statuses: {
+                    ontime: 'On Time',
+                    departed: 'Departed',
+                    boarding: 'Boarding',
+                    delayed: ' min delay',
+                    cancelled: 'Cancelled'
+                }
+            }
+        },
+        arrivals: {
+            title: 'Arrivals',
+            intro: 'The table below shows all scheduled arrivals for today.',
+            table: {
+                headers: ['Flight', 'Origin', 'Scheduled Arrival', 'Terminal', 'Status'],
+                statuses: {
+                    ontime: 'On Time',
+                    landed: 'Landed',
+                    approaching: 'Approaching',
+                    delayed: ' min delay'
+                }
+            }
+        },
+        services: {
+            title: 'Services',
+            intro: 'The airport provides numerous amenities for our passengers:',
+            items: [
+                'Free Wi-Fi',
+                'Taxi and car rental',
+                'Airport shuttle bus',
+                'Parking (short and long term)',
+                'VIP lounge',
+                'First Aid and pharmacy',
+                'Child-friendly areas',
+                'Public address system',
+                'Guide dog assistance'
+            ]
+        },
+        contact: {
+            title: 'Contact',
+            intro: 'If you have any questions, please get in touch:',
+            items: [
+                'Email: info@bazsirepter.hu',
+                'Phone: +36 1 234 5678',
+                'Address: Bazsi City Airport, District 2'
+            ]
+        },
+        footer: {
+            copyright: '© 2025 Bazsi City International Airport. All rights reserved.'
+        }
+    }
+};
+
+// Bővített nyelvváltó funkció
+function changeLanguage(language) {
+    console.log('Nyelv váltása: ' + language);
+    
+    // Kiválasztjuk a megfelelő nyelvi objektumot
+    const lang = translations[language];
+    
+    // Header
+    document.querySelector('.logo h1').textContent = lang.header.title;
+    document.querySelector('.sr-only').textContent = lang.header.langSelector;
+    
+    // Nav links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].textContent = lang.header.nav[i];
+    }
+    
+    // Warning banner
+    document.querySelector('.warning-banner').innerHTML = lang.warning;
+    
+    // Home page
+    if (document.getElementById('home').classList.contains('active')) {
+        document.querySelector('.hero-content h2').textContent = lang.home.hero.title;
+        document.querySelector('.hero-content p').textContent = lang.home.hero.subtitle;
+        document.querySelector('.hero-content .btn').textContent = lang.home.hero.button;
+        
+        document.querySelector('.section-title').textContent = lang.home.terminalTitle;
+        
+        // Terminálok
+        const terminalHeaders = document.querySelectorAll('.terminal-header');
+        terminalHeaders[0].textContent = lang.home.terminals.a.header;
+        terminalHeaders[1].textContent = lang.home.terminals.b.header;
+        terminalHeaders[2].textContent = lang.home.terminals.c.header;
+        
+        // Terminál lista elemek
+        const terminalAItems = document.querySelectorAll('.terminal-card:nth-child(1) .terminal-content ul li');
+        const terminalBItems = document.querySelectorAll('.terminal-card:nth-child(2) .terminal-content ul li');
+        const terminalCItems = document.querySelectorAll('.terminal-card:nth-child(3) .terminal-content ul li');
+        
+        for (let i = 0; i < terminalAItems.length; i++) {
+            terminalAItems[i].textContent = lang.home.terminals.a.items[i];
+        }
+        
+        for (let i = 0; i < terminalBItems.length; i++) {
+            terminalBItems[i].textContent = lang.home.terminals.b.items[i];
+        }
+        
+        for (let i = 0; i < terminalCItems.length; i++) {
+            terminalCItems[i].textContent = lang.home.terminals.c.items[i];
+        }
+    }
+    
+    // Departures page
+    if (document.getElementById('departures')) {
+        const depPage = document.getElementById('departures');
+        depPage.querySelector('.section-title').textContent = lang.departures.title;
+        depPage.querySelector('p').textContent = lang.departures.intro;
+        
+        // Table headers
+        const depHeaders = depPage.querySelectorAll('table th');
+        for (let i = 0; i < depHeaders.length; i++) {
+            depHeaders[i].textContent = lang.departures.table.headers[i];
+        }
+        
+        // Status texts - need special handling
+        const depStatusCells = depPage.querySelectorAll('.status');
+        
+        depStatusCells.forEach(cell => {
+            if (cell.classList.contains('status-ontime') && cell.textContent === 'Időben' || cell.textContent === 'On Time') {
+                cell.textContent = lang.departures.table.statuses.ontime;
+            } else if (cell.textContent === 'Elindult' || cell.textContent === 'Departed') {
+                cell.textContent = lang.departures.table.statuses.departed;
+            } else if (cell.textContent === 'Beszállítás' || cell.textContent === 'Boarding') {
+                cell.textContent = lang.departures.table.statuses.boarding;
+            } else if (cell.textContent === 'Törölve' || cell.textContent === 'Cancelled') {
+                cell.textContent = lang.departures.table.statuses.cancelled;
+            } else if (cell.classList.contains('status-delayed')) {
+                // For delayed status, extract the number
+                const delayMinutes = cell.textContent.replace(/[^\d]/g, '');
+                cell.textContent = delayMinutes + lang.departures.table.statuses.delayed;
+            }
+        });
+    }
+    
+    // Arrivals page
+    if (document.getElementById('arrivals')) {
+        const arrPage = document.getElementById('arrivals');
+        arrPage.querySelector('.section-title').textContent = lang.arrivals.title;
+        arrPage.querySelector('p').textContent = lang.arrivals.intro;
+        
+        // Table headers
+        const arrHeaders = arrPage.querySelectorAll('table th');
+        for (let i = 0; i < arrHeaders.length; i++) {
+            arrHeaders[i].textContent = lang.arrivals.table.headers[i];
+        }
+        
+        // Status texts - need special handling
+        const arrStatusCells = arrPage.querySelectorAll('.status');
+        
+        arrStatusCells.forEach(cell => {
+            if (cell.classList.contains('status-ontime') && cell.textContent === 'Időben' || cell.textContent === 'On Time') {
+                cell.textContent = lang.arrivals.table.statuses.ontime;
+            } else if (cell.textContent === 'Leszállt' || cell.textContent === 'Landed') {
+                cell.textContent = lang.arrivals.table.statuses.landed;
+            } else if (cell.textContent === 'Hamarosan érkezik' || cell.textContent === 'Approaching') {
+                cell.textContent = lang.arrivals.table.statuses.approaching;
+            } else if (cell.classList.contains('status-delayed')) {
+                // For delayed status, extract the number
+                const delayMinutes = cell.textContent.replace(/[^\d]/g, '');
+                cell.textContent = delayMinutes + lang.arrivals.table.statuses.delayed;
+            }
+        });
+    }
+    
+    // Services page
+    if (document.getElementById('services')) {
+        const servicesPage = document.getElementById('services');
+        servicesPage.querySelector('.section-title').textContent = lang.services.title;
+        servicesPage.querySelector('p').textContent = lang.services.intro;
+        
+        // List items
+        const serviceItems = servicesPage.querySelectorAll('ul li');
+        for (let i = 0; i < serviceItems.length; i++) {
+            serviceItems[i].textContent = lang.services.items[i];
+        }
+    }
+    
+    // Contact page
+    if (document.getElementById('contact')) {
+        const contactPage = document.getElementById('contact');
+        contactPage.querySelector('.section-title').textContent = lang.contact.title;
+        contactPage.querySelector('p').textContent = lang.contact.intro;
+        
+        // List items
+        const contactItems = contactPage.querySelectorAll('ul li');
+        for (let i = 0; i < contactItems.length; i++) {
+            contactItems[i].textContent = lang.contact.items[i];
+        }
+    }
+    
+    // Footer
+    document.querySelector('footer p').textContent = lang.footer.copyright;
+}
+
+// Alapértelmezett nyelv beállítása
+ changeLanguage('hu');
+      </script>      
+</body>
+</html>
